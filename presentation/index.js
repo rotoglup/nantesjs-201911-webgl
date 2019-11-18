@@ -50,15 +50,6 @@ const images = {
   mgdesign_vendome: require("../assets/mgdesign_vendome.jpg"),
 };
 
-const styles_ex = {
-  work_base: require("../assets/style_work_base.json"),
-  polygons: require("../assets/style_base_polygons.json"),
-  polygons_filter: require("../assets/style_base_polygons_filter.json"),
-  lignes: require("../assets/style_base_lignes.json"),
-  lignes_labels: require("../assets/style_base_lignes_labels.json"),
-  points: require("../assets/style_base_points.json")
-}
-
 preloader(images);
 
 let theme = createTheme({
@@ -70,113 +61,6 @@ let theme = createTheme({
   primary: "Montserrat",
   secondary: "Helvetica"
 });
-
-
-function showMapboxgl() {
-  console.log("showMapboxgl");
-  document.getElementById('mbgl-map').style.visibility = 'visible';
-  //document.getElementById('iframe-panel').style.display = 'none';
-  //document.getElementById('iframe-panel').src = 'http://www.maptiler.org/google-maps-coordinates-tile-bounds-projection/';
-}
-
-//----------------------------------------------------------------------------
-//----------------------------------------------------------------------------
-
-let _g_dirty_globals = {
-  style: null
-};
-
-class Mapboxgl extends React.Component {
-
-  componentWillMount() {
-    
-    showMapboxgl();
-    
-    if (this.props.flyTo) {
-      g_mbgl_map.flyTo(this.props.flyTo);
-    }
-    
-    g_mbgl_map.showTileBoundaries = !!this.props.showTileBoundaries;
-
-    let style = this.props.style || style_default;
-    if (_g_dirty_globals.style != style) {            // NOTE(nico) pour éviter le repaint complet de la carte
-      _g_dirty_globals.style = style;
-      g_mbgl_map.setStyle(style);
-    }
-  }
-
-  render() {
-    return null;
-  }
-}
-
-//----------------------------------------------------------------------------
-//----------------------------------------------------------------------------
-
-const location_world = {
-  center: [0, 0],
-  zoom: 1.01,
-  bearing: 0
-}
-
-const location_france = {
-  center: [-1.55, 47.216671],
-  zoom: 5,
-  bearing: 0
-}
-
-const location_nz = {
-  center: [166.6, -40.4339731],
-  zoom: 4,
-  bearing: 0
-}
-
-const location_nantes = {
-  center: [-1.55, 47.216671],
-  zoom: 12.75,
-  bearing: 0
-}
-
-const location_mgdesign = {
-  center: [-1.556206, 47.20675],
-  zoom: 15.0,
-  bearing: 0
-}
-
-const location_google = {
-  center: [-122.0840782, 37.4220238],
-  zoom: 17.25,
-  bearing: 0
-}
-
-const location_mapbox = {
-  center: [-122.3999209, 37.7884401],
-  zoom: 17.0,
-  bearing: 0
-}
-
-const style_streets = 'mapbox://styles/mapbox/streets-v9';
-const style_basic = 'mapbox://styles/mapbox/basic-v9';
-const style_dark = 'mapbox://styles/mapbox/dark-v9';
-const style_default = style_basic;
-
-const style_raster = {
-  "version": 8,
-  "sources": {
-    "raster-tiles": {
-        "type": "raster",
-        "url": "mapbox://mapbox.streets",
-        "tileSize": 256
-    }
-  },
-  "layers": [{
-    "id": "simple-tiles",
-    "type": "raster",
-    "source": "raster-tiles",
-    "minzoom": 0,
-    "maxzoom": 22
-  }]
-}
 
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
@@ -191,7 +75,6 @@ export default class Presentation extends React.Component {
       <Deck transition={["zoom", "slide"]} transitionDuration={500} theme={theme}>
 
         <Slide transition={["zoom"]} bgColor="primary">
-          <Mapboxgl flyTo={location_nantes}/>
           <Heading size={1} fit caps lineHeight={1} textColor="secondary">
             Promenade au pays de la carto
           </Heading>
@@ -201,7 +84,6 @@ export default class Presentation extends React.Component {
         </Slide>
 
         <Slide transition={["fade"]}>
-          <Mapboxgl flyTo={location_mgdesign}/>
           <Image src={images.rotoglup.replace('/', '')} width="20%"/>
           <Heading size={3} textColor="secondary">Nicolas Lelong</Heading>
           <Heading size={6}>@rotoglup</Heading>
@@ -218,11 +100,9 @@ export default class Presentation extends React.Component {
       { /******************************************************************************/ }
 
         <Slide {...slideProps}>
-          <Mapboxgl flyTo={location_world} style={style_streets}/>
           <Heading size={3}>Pourquoi mapboxgl ?</Heading>
         </Slide>
         <Slide {...slideProps}>
-          <Mapboxgl flyTo={location_google} style={style_streets}/>
           <Heading size={3}>Pourquoi pas</Heading>
           <Heading size={4} textColor="tertiary">Google (Maps) ?</Heading>
           <Appear><div>
@@ -232,7 +112,6 @@ export default class Presentation extends React.Component {
           </div></Appear>
         </Slide>
         <Slide {...slideProps}>
-          <Mapboxgl flyTo={location_mapbox} style={style_streets}/>
           <Heading size={3}>mapbox(gl)</Heading>
           <Appear><div>
             <Text>Self-hosting possible</Text>
@@ -245,7 +124,6 @@ export default class Presentation extends React.Component {
       { /******************************************************************************/ }
 
         <Slide {...slideProps}>
-          <Mapboxgl flyTo={location_world} showTileBoundaries={true}/>
           <Heading size={3}>L'important, c'est la tuile</Heading>
           <Image src={images.tiles_schema.replace('/', '')} width="80%"/>
           <Text>Le monde découpé en carrés</Text>
@@ -253,7 +131,6 @@ export default class Presentation extends React.Component {
         </Slide>
 
         <Slide {...slideProps}>
-          <Mapboxgl style={style_raster} showTileBoundaries={true}/>
           <Heading size={3}>Tuiles "raster"</Heading>
           <Text>JPG, PNG, 256x256</Text>
           <Notes>
@@ -266,7 +143,6 @@ export default class Presentation extends React.Component {
         </Slide>
 
         <Slide {...slideProps}>
-          <Mapboxgl style={style_streets} showTileBoundaries={true}/>
           <Heading size={3}>Tuiles "vecteur"</Heading>
           <Text>GeoJSON, TopoJSON, 'MVT', ...</Text>
           <Image src={images.vector_tile_example.replace('/', '')} width="60%"/>
@@ -281,7 +157,6 @@ export default class Presentation extends React.Component {
         </Slide>
 
         <Slide {...slideProps}>
-          <Mapboxgl flyTo={location_nantes} style={style_streets}/>
           <Heading size={3}>Tuiles "vecteur"</Heading>
           <Heading size={4} textColor="tertiary">avantages</Heading>
           <Appear><div>
@@ -311,7 +186,6 @@ export default class Presentation extends React.Component {
         </Slide>
         
         <Slide {...slideProps}>
-          <Mapboxgl flyTo={location_nantes} style={style_basic}/>
           <Heading size={3}>Les données carto</Heading>
           <List>
             <ListItem>Spécification de données</ListItem>
@@ -331,7 +205,6 @@ export default class Presentation extends React.Component {
         </Slide>
         
         <Slide {...slideProps}>
-          <Mapboxgl style={style_dark}/>
           <Heading size={3}>Les cartes</Heading>
           <List>
             <ListItem>Spécification de style</ListItem>
@@ -405,7 +278,6 @@ export default class Presentation extends React.Component {
         </Slide>
 
         <Slide {...slideProps}>
-          <Mapboxgl flyTo={location_france}/>
           <Heading size={5} textColor="secondary">Style</Heading>
           <Heading size={3}>Sources</Heading>
           <CodePane {...codeProps} lang="javascript" source={`
@@ -426,7 +298,6 @@ export default class Presentation extends React.Component {
         </Slide>
 
         <Slide {...slideProps}>
-        <Mapboxgl style={styles_ex.polygons}/>
         <Heading size={5} textColor="secondary">Style</Heading>
         <Heading size={3}>Calques</Heading>
         <Text>Polygones</Text>
@@ -448,7 +319,6 @@ export default class Presentation extends React.Component {
       </Slide>
 
       <Slide {...slideProps}>
-          <Mapboxgl style={styles_ex.polygons_filter}/>
           <Heading size={5} textColor="secondary">Style</Heading>
           <Heading size={3}>Calques</Heading>
           <Text>Filtre</Text>
@@ -466,7 +336,6 @@ export default class Presentation extends React.Component {
         </Slide>
 
         <Slide {...slideProps}>
-        <Mapboxgl style={styles_ex.lignes}/>
         <Heading size={5} textColor="secondary">Style</Heading>
         <Heading size={3}>Calques</Heading>
         <Text>Lignes</Text>
@@ -486,7 +355,6 @@ export default class Presentation extends React.Component {
       </Slide>
 
       <Slide {...slideProps}>
-          <Mapboxgl style={styles_ex.lignes_labels}/>
           <Heading size={5} textColor="secondary">Style</Heading>
           <Heading size={3}>Calques</Heading>
           <Text>Lignes, étiquettes</Text>
@@ -511,7 +379,6 @@ export default class Presentation extends React.Component {
         </Slide>
 
         <Slide {...slideProps}>
-          <Mapboxgl style={styles_ex.points}/>
           <Heading size={5} textColor="secondary">Style</Heading>
           <Heading size={3}>Calques</Heading>
           <Text>Points, symboles</Text>
@@ -546,7 +413,6 @@ export default class Presentation extends React.Component {
       { /******************************************************************************/ }
 
       <Slide {...slideProps}>
-      <Mapboxgl flyTo={location_nantes} style={style_streets}/>
       <Heading size={5} textColor="secondary">mapboxgl</Heading>
       <Heading size={3}>Performant</Heading>
       <Text>WebGL</Text>
@@ -574,7 +440,6 @@ export default class Presentation extends React.Component {
     </Slide>
 
       <Slide {...slideProps}>
-        <Mapboxgl flyTo={location_mgdesign}/>
         <Heading size={5} textColor="secondary">mapboxgl</Heading>
         <Heading size={3}>Notre utilisation</Heading>
         <Text>Offline (self-hosted)</Text>
@@ -620,7 +485,6 @@ export default class Presentation extends React.Component {
       </Slide>
 
     <Slide {...slideProps}>
-      <Mapboxgl flyTo={location_nz}/>
         <Heading size={3}>Merci !</Heading>
         <Notes>
         * Recrutement !!<br/>
