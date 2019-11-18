@@ -30,24 +30,13 @@ require("spectacle/lib/themes/default/index.css");
 
 
 const images = {
-  city: require("../assets/city.jpg"),
-  kat: require("../assets/kat.png"),
-  logo: require("../assets/formidable-logo.svg"),
-  markdown: require("../assets/markdown.png"),
-  logo_mgd: require("../assets/logo_mgd_v5.png"),
   rotoglup: require("../assets/rotoglup_denyzor.png"),
-  maputnik: require("../assets/maputnik.gif"),
-  openmaptiles: require("../assets/openmaptiles.png"),
-  github: require("../assets/github.png"),
-  mapbox: require("../assets/mapbox.png"),
-  tiles_schema: require("../assets/tiles_schema.png"),
-  vector_tile_example: require("../assets/vector_tile_example.png"),
-  raster_vs_vector: require("../assets/raster_vs_vector.jpg"),
-  chrono: require("../assets/chrono.png"),
-  balance: require("../assets/balance.png"),
-  mgdesign_altimetrie: require("../assets/mgdesign_altimetrie.jpg"),
-  mgdesign_lnpn: require("../assets/mgdesign_lnpn.jpg"),
-  mgdesign_vendome: require("../assets/mgdesign_vendome.jpg"),
+  example_architecture: require("../assets/example-architecture.png"),
+  example_claraio: require("../assets/example-claraio.png"),
+  example_map: require("../assets/example-map.png"),
+  example_graph: require("../assets/example-graph.png"),
+  example_tensorflow: require("../assets/example-tensorflow.png"),
+  example_terrain: require("../assets/example-terrain.png"),
 };
 
 preloader(images);
@@ -91,17 +80,55 @@ export default class Presentation extends React.Component {
           <CodePane {...codeProps} source='void hello(char const* world) { printf("Hello %s", world); }'></CodePane>
           <CodePane {...codeProps} source='def hello(world): print "Hello %s" % world'></CodePane>
           <CodePane {...codeProps} source='function hello(world) { console.log(`Hello ${world}`); }'></CodePane>
-          <Appear>
-            <Image src={images.logo_mgd.replace('/', '')} width="60%"/>
-          </Appear>
         </Slide>
         
 
       { /******************************************************************************/ }
 
         <Slide {...slideProps}>
-          <Heading size={3}>Pourquoi mapboxgl ?</Heading>
+          <Heading size={2}>WebGL - ça sert à quoi ?</Heading>
         </Slide>
+  
+        <Slide {...slideProps}>
+          <Text>Afficher rapidement des images</Text>
+          <Text textColor="tertiary">3D</Text>
+          <Image src={images.example_terrain.replace('/', '')} width="80%"/>
+        </Slide>
+        <Slide {...slideProps}>
+          <Text>Afficher rapidement des images</Text>
+          <Text textColor="tertiary">3D</Text>
+          <Image src={images.example_architecture.replace('/', '')} width="80%"/>
+        </Slide>
+        <Slide {...slideProps}>
+          <Text>Afficher rapidement des images</Text>
+          <Text textColor="tertiary">3D</Text>
+          <Image src={images.example_claraio.replace('/', '')} width="80%"/>
+        </Slide>
+  
+        <Slide {...slideProps}>
+          <Text>Afficher rapidement des images</Text>
+          <Text textColor="tertiary">2D</Text>
+          <Image src={images.example_map.replace('/', '')} width="60%"/>
+        </Slide>
+        <Slide {...slideProps}>
+          <Text>Afficher rapidement des images</Text>
+          <Text textColor="tertiary">2D</Text>
+          <Image src={images.example_graph.replace('/', '')} width="60%"/>
+        </Slide>
+
+        <Slide {...slideProps}>
+          <Text>Calculer rapidement des</Text>
+          <Text textColor="tertiary">valeurs</Text>
+          <Image src={images.example_tensorflow.replace('/', '')} width="60%"/>
+          <Text>(Tensorflow)</Text>
+        </Slide>
+
+        { /******************************************************************************/ }
+
+        <Slide {...slideProps}>
+          <Heading size={2}>WebGL - ça vient d'où ?</Heading>
+        </Slide>
+
         <Slide {...slideProps}>
           <Heading size={3}>Pourquoi pas</Heading>
           <Heading size={4} textColor="tertiary">Google (Maps) ?</Heading>
@@ -117,7 +144,7 @@ export default class Presentation extends React.Component {
             <Text>Self-hosting possible</Text>
             <Text>Données, formats, API, code</Text>
             <Text>Ouverts</Text>
-            <Image src={images.github.replace('/', '')} width="25%"/>
+            <Image src={images.rotoglup.replace('/', '')} width="25%"/>
           </div></Appear>
         </Slide>
 
@@ -125,7 +152,7 @@ export default class Presentation extends React.Component {
 
         <Slide {...slideProps}>
           <Heading size={3}>L'important, c'est la tuile</Heading>
-          <Image src={images.tiles_schema.replace('/', '')} width="80%"/>
+          <Image src={images.rotoglup.replace('/', '')} width="80%"/>
           <Text>Le monde découpé en carrés</Text>
           <Text>"quadtree"</Text>
         </Slide>
@@ -145,7 +172,7 @@ export default class Presentation extends React.Component {
         <Slide {...slideProps}>
           <Heading size={3}>Tuiles "vecteur"</Heading>
           <Text>GeoJSON, TopoJSON, 'MVT', ...</Text>
-          <Image src={images.vector_tile_example.replace('/', '')} width="60%"/>
+          <Image src={images.rotoglup.replace('/', '')} width="60%"/>
           <Notes>
             * Depuis ~2014<br/>
             * Google Maps<br/>
@@ -160,11 +187,11 @@ export default class Presentation extends React.Component {
           <Heading size={3}>Tuiles "vecteur"</Heading>
           <Heading size={4} textColor="tertiary">avantages</Heading>
           <Appear><div>
-            <Image src={images.raster_vs_vector.replace('/', '')} width="30%"/>
+            <Image src={images.rotoglup.replace('/', '')} width="30%"/>
             <Text/>
-            <Image src={images.balance.replace('/', '')} width="15%"/>
+            <Image src={images.rotoglup.replace('/', '')} width="15%"/>
             <Text/>
-            <Image src={images.chrono.replace('/', '')} width="15%"/>
+            <Image src={images.rotoglup.replace('/', '')} width="15%"/>
           </div></Appear>
           <Notes>
             * Zoom<br/>
@@ -178,7 +205,7 @@ export default class Presentation extends React.Component {
         <Slide {...slideProps}>
           <Heading size={3}>Un peu de contexte</Heading>
           <Heading size={4} textColor="tertiary">mapbox, sans gl</Heading>
-          <Image src={images.mapbox.replace('/', '')} width="25%"/>
+          <Image src={images.rotoglup.replace('/', '')} width="25%"/>
           <Notes>
             * ~500 personnes<br/>
             * $$$ = services (geocodage, itineraires, hébergement cartes)<br/>
@@ -194,7 +221,7 @@ export default class Presentation extends React.Component {
           </List>
           <Appear><div>
             <Text>openmaptiles</Text>
-            <Image src={images.openmaptiles.replace('/', '')} width="60%"/>
+            <Image src={images.rotoglup.replace('/', '')} width="60%"/>
           </div></Appear>
           <Notes>
             * Données tirées de OSM<br/>
@@ -213,7 +240,7 @@ export default class Presentation extends React.Component {
           </List>
           <Appear><div>
             <Text>maputnik</Text>
-            <Image src={images.maputnik.replace('/', '')} width="60%"/>
+            <Image src={images.rotoglup.replace('/', '')} width="60%"/>
           </div></Appear>
           <Notes>
             * Style = JSON<br/>
@@ -226,7 +253,7 @@ export default class Presentation extends React.Component {
         <Slide {...slideProps}>
           <Heading size={3}>mapbox</Heading>
           <Heading size={5} textColor="tertiary">Beaucoup de code</Heading>
-          <Image src={images.github.replace('/', '')} width="25%"/>
+          <Image src={images.rotoglup.replace('/', '')} width="25%"/>
           <Notes>
           * Librairies diverses autour de la carto<br/>
           * ex. Format 'mbtiles'<br/>
@@ -267,7 +294,7 @@ export default class Presentation extends React.Component {
           <Heading size={5} textColor="secondary">mapboxgl</Heading>
           <Heading size={3}>Style</Heading>
           <Text>Spécification ouverte</Text>
-          <Image src={images.github.replace('/', '')} width="25%"/>
+          <Image src={images.rotoglup.replace('/', '')} width="25%"/>
           <Notes>
           * Moins documentée<br/>
           * Cachée derrière les outils<br/>
@@ -450,15 +477,15 @@ export default class Presentation extends React.Component {
       </Slide>
 
       <Slide {...slideProps}>
-      <Image src={images.mgdesign_lnpn.replace('/', '')} width="95%"/>
+      <Image src={images.rotoglup.replace('/', '')} width="95%"/>
     </Slide>
 
       <Slide {...slideProps}>
-        <Image src={images.mgdesign_altimetrie.replace('/', '')} width="95%"/>
+        <Image src={images.rotoglup.replace('/', '')} width="95%"/>
       </Slide>
 
       <Slide {...slideProps}>
-        <Image src={images.mgdesign_vendome.replace('/', '')} width="95%"/>
+        <Image src={images.rotoglup.replace('/', '')} width="95%"/>
       </Slide>
 
       <Slide {...slideProps}>
