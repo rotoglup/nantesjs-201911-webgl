@@ -98,7 +98,7 @@ export default class Presentation extends React.Component {
         
         <Slide {...slideProps}>
           <Heading size={2}>WebGL - vaste&nbsp;sujet</Heading>
-          <Text>Un tour d'horizon, pas un tuto</Text>
+          <Text>Un tour d'horizon partial, pas un tuto</Text>
         </Slide>
 
         {/*
@@ -306,18 +306,26 @@ if (!gl) {
 `}/>
         </Slide>
 
+        <Slide {...slideProps}>
+          <Heading size={4}>Un triangle pour exemple</Heading>
+          <Image src={images.api_buffers.replace('/', '')} width="100%"/>
+        </Slide>
+
         { /******************************************************************************/ }
 
         <Slide {...slideProps}>
           <Heading size={2}>GLSL</Heading>
-          <Heading size={4}>Un <em>Program</em>, deux <em>Shaders</em></Heading>
+          <Text>GL Shading Language</Text>
+          <Text>- dédié</Text>
+          <Text>- typé</Text>
+          <Text>- compilé</Text>
         </Slide>
 
         <Slide {...slideProps}>
-          <Heading size={4}>Un <em>Program</em>, deux <em>Shaders</em></Heading>
-          <Text>n°1 - Vertex shader, pour chaque <em>sommet</em></Text>
+          <Heading size={4}>Vertex shader</Heading>
+          <Text>n°1, pour chaque <em>sommet</em></Text>
           <CodePane {...codeProps} lang="javascript" source={`attribute vec3 inPosition;  // en provenance des buffers
-attribute vec3 inColor;   // variables typées
+attribute vec3 inColor;
 
 varying vec3 vColor;        // sortie vers le fragment shader
 
@@ -327,12 +335,12 @@ void main()
     // position à utiliser pour l'affichage :
     gl_Position = vec4(inPosition, 1.0);
 }`}/>
-          <Text>Langage GLSL <em>(GL Shading Language)</em></Text>
+          <Text>mots clés <Code>attribute, varying, gl_Position</Code></Text>
         </Slide>
   
         <Slide {...slideProps}>
-          <Heading size={4}>Un <em>Program</em>, deux <em>Shaders</em></Heading>
-          <Text>n°2 - Fragment shader, pour chaque <em>pixel</em></Text>
+          <Heading size={4}>Fragment shader</Heading>
+          <Text>n°2, pour chaque <em>pixel</em></Text>
           <CodePane {...codeProps} lang="javascript" source={`precision mediump float;    // qualité/performance (mobile)
 varying vec3 vColor;        // dérivé du vertex shader
 
@@ -341,7 +349,7 @@ void main()
     // couleur à afficher :
     gl_FragColor = vec4(inColor, 1.0);
 }`}/>
-          <Text>Langage GLSL <em>(GL Shading Language)</em></Text>
+          <Text>mots clés <Code>varying, gl_FragColor</Code></Text>
         </Slide>
 
         <Slide {...slideProps}>
@@ -354,10 +362,10 @@ const fs = gl.createShader(gl.FRAGMENT_SHADER);
 gl.shaderSource(fs, my_fragment_shader_source_code_string);
 gl.compileShader(fs);
 
-const program = gl.createProgram();
-gl.attachShader(program, vs);
-gl.attachShader(program, fs);
-gl.linkProgram(program);
+const my_program = gl.createProgram();
+gl.attachShader(my_program, vs);
+gl.attachShader(my_program, fs);
+gl.linkProgram(my_program);
 
 gl.deleteShader(vs);
 gl.deleteShader(fs);
@@ -367,7 +375,7 @@ gl.deleteShader(fs);
 
         <Slide {...slideProps}>
           <Heading size={4}>Un compilateur embarqué</Heading>
-          <Text>Gestion 'manuelle' des erreurs</Text>
+          <Text>Consultation 'manuelle' des erreurs</Text>
           <CodePane {...codeProps} lang="javascript" source={`const status = gl.getShaderParameter(shader, gl.COMPILE_STATUS);
 if (!status) {
   throw "could not compile shader:" + gl.getShaderInfoLog(shader);
@@ -391,7 +399,8 @@ if (!status) {
         <Slide {...slideProps}>
           <Heading size={4}>Bas niveau</Heading>
           <Text>Données binaires, via des <em>TypedArray</em></Text>
-          <Image src={images.api_typed_arrays.replace('/', '')} width="60%"/>
+          <Code>Uint16Array, Float32Array, ...</Code>
+          <Image src={images.api_typed_arrays.replace('/', '')} width="90%"/>
           <Text>Gestion manuelle de la mémoire</Text>
           <Text><em>Libérer !</em></Text>
         </Slide>
@@ -440,7 +449,7 @@ gl.deleteBuffer(ibo);
           <Text>Attention, verbeux</Text>
           <CodePane {...codeProps} lang="javascript" source={`// lié à la déclaration GLSL 'attribute vec3 inPosition;'
 // lié à la définition js 'const positions = new Float32Array(...)'
-const positionLoc = gl.getAttribLocation(m_glsl_program, "inPosition");
+const positionLoc = gl.getAttribLocation(my_program, "inPosition");
 
 gl.bindBuffer(gl.ARRAY_BUFFER, positionVBO);
 gl.vertexAttribPointer(positionLoc, 3, gl.FLOAT, false, 0, 0);
@@ -466,9 +475,13 @@ gl.bindBuffer(gl.ARRAY_BUFFER, colorVBO);
 
         <Slide {...slideProps}>
           <Heading size={4}>API WebGL 'de base'</Heading>
-          <Appear><Text>Complexe</Text></Appear>
-          <Appear><Text>Debuggabilité complexe</Text></Appear>
-          <Appear><Text>Pas Javascript friendly</Text></Appear>
+          <Appear><Text>- Complexe</Text></Appear>
+          <Appear><Text>à développer (gestion des états)</Text></Appear>
+          <Appear><Text>à débugger (erreurs silencieuses)</Text></Appear>
+          <Appear><div>
+            <Text>&nbsp;</Text>
+            <Text>- Pas Javascript friendly</Text>
+          </div></Appear>
         </Slide>
 
         <Slide {...slideProps}>
@@ -578,6 +591,7 @@ drawCall();
         <Slide {...slideProps}>
           <Heading size={4}>En résumé</Heading>
           <Text>- Plateforme puissante</Text>
+          <Text>- Langage dédié (GLSL),</Text>
           <Text>- API datée, complexe,</Text>
           <Text>destinée aux dev 3D</Text>
           <Text><em>mais</em></Text>
