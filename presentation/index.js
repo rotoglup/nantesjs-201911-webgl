@@ -32,6 +32,13 @@ require("spectacle/lib/themes/default/index.css");
 
 const images = {
   rotoglup: require("../assets/rotoglup_denyzor.png"),
+  webgl_1986: require("../assets/webgl-1986.png"),
+  webgl_browsers: require("../assets/webgl-browsers.png"),
+  logo_opengl: require("../assets/logo-opengl.png"),
+  logo_opengles: require("../assets/logo-opengles.png"),
+  logo_webgl: require("../assets/logo-webgl.png"),
+  opengl_desktop: require("../assets/opengl-desktop.png"),
+  opengles_mobile: require("../assets/opengles-mobile.png"),
   example_architecture: require("../assets/example-architecture.png"),
   example_claraio: require("../assets/example-claraio.png"),
   example_map: require("../assets/example-map.png"),
@@ -80,23 +87,61 @@ export default class Presentation extends React.Component {
         </Slide>
 
         <Slide transition={["fade"]}>
-          <Image src={images.rotoglup.replace('/', '')} width="20%"/>
           <Heading size={3} textColor="secondary">Nicolas Lelong</Heading>
-          <Heading size={6}>@rotoglup FIXME</Heading>
-          <Heading size={6} textColor="primary">spacer</Heading>
+          <Heading size={6}>@rotoglup</Heading>
+          <Text>Expert freelance, création&nbsp;de&nbsp;logiciels&nbsp;3D,&nbsp;2D,&nbsp;SIG</Text>
+          <Text>&nbsp;</Text>
           <CodePane {...codeProps} source='void hello(char const* world) { printf("Hello %s", world); }'></CodePane>
           <CodePane {...codeProps} source='def hello(world): print "Hello %s" % world'></CodePane>
           <CodePane {...codeProps} source='function hello(world) { console.log(`Hello ${world}`); }'></CodePane>
         </Slide>
         
+        <Slide {...slideProps}>
+          <Heading size={2}>WebGL - vaste&nbsp;sujet</Heading>
+          <Text>Un tour d'horizon, pas un tuto</Text>
+        </Slide>
+
+        {/*
         <Slide>
-          <Text>Thanks</Text>
+          <Text>Thanks FIXME</Text>
           <Text>https://www.ntu.edu.sg/home/ehchua/programming/opengl/CG_BasicsTheory.html</Text>
           <Text>http://igm.univ-mlv.fr/~lnoel/index.php?section=teaching&teaching=opengl&teaching_section=tds&td=td4</Text>
           <Text>https://alain.xyz/blog/raw-webgl</Text>
         </Slide>
+        */}
 
-      { /******************************************************************************/ }
+        { /******************************************************************************/ }
+        { /******************************************************************************/ }
+        { /******************************************************************************/ }
+
+        <Slide {...slideProps}>
+          <Heading size={2}>WebGL - ça&nbsp;fait&nbsp;quoi ?</Heading>
+        </Slide>
+
+        <Slide {...slideProps}>
+          <Heading size={4}>Communique avec le GPU</Heading>
+          <Image src={images.what_CPU_GPU.replace('/', '')} width="60%"/>
+          <Text>Asynchrone</Text>
+          <Text>Mémoire dédiée</Text>
+        </Slide>
+
+        <Slide {...slideProps}>
+          <Heading size={4}>GPU ?</Heading>
+          <Text>Afficher des triangles</Text>
+          <Image src={images.what_triangles_machine.replace('/', '')} width="60%"/>
+          <Text>...des lignes et des points parfois...</Text>
+        </Slide>
+
+        <Slide {...slideProps}>
+          <Heading size={4}>Et c'est tout ?</Heading>
+          <Text>oui !</Text>
+          <Image src={images.what_programmable.replace('/', '')} width="60%"/>
+          <Text>mais c'est programmable !</Text>
+        </Slide>
+
+        { /******************************************************************************/ }
+        { /******************************************************************************/ }
+        { /******************************************************************************/ }
 
         <Slide {...slideProps}>
           <Heading size={2}>WebGL - ça&nbsp;sert&nbsp;à&nbsp;quoi ?</Heading>
@@ -137,36 +182,64 @@ export default class Presentation extends React.Component {
         </Slide>
 
         { /******************************************************************************/ }
-
-        <Slide {...slideProps}>
-          <Heading size={2}>WebGL - ça&nbsp;fait&nbsp;quoi ?</Heading>
-        </Slide>
-
-        <Slide {...slideProps}>
-          <Heading size={4}>Communique avec le GPU</Heading>
-          <Image src={images.what_CPU_GPU.replace('/', '')} width="60%"/>
-          <Text>Asynchrone</Text>
-          <Text>Mémoire dédiée</Text>
-        </Slide>
-
-        <Slide {...slideProps}>
-          <Heading size={4}>GPU ?</Heading>
-          <Text>Afficher des triangles</Text>
-          <Image src={images.what_triangles_machine.replace('/', '')} width="60%"/>
-          <Text>...des lignes et des points parfois...</Text>
-        </Slide>
-
-        <Slide {...slideProps}>
-          <Heading size={4}>Et c'est tout ?</Heading>
-          <Text>oui !</Text>
-          <Image src={images.what_programmable.replace('/', '')} width="60%"/>
-          <Text>mais c'est programmable !</Text>
-        </Slide>
-
+        { /******************************************************************************/ }
         { /******************************************************************************/ }
 
         <Slide {...slideProps}>
           <Heading size={2}>WebGL - ça&nbsp;vient&nbsp;d'où ?</Heading>
+        </Slide>
+
+        <Slide {...slideProps}>
+          <Heading size={4}>L'histoire commence</Heading>
+          <Appear><div>
+            <Text>Dans les années 1980-1990</Text>
+            <Image src={images.webgl_1986.replace('/', '')} width="40%"/>
+          </div></Appear>
+          <Appear><Text>IrisGL et autres API propriétaires</Text></Appear>
+          <Appear><Text>1992 : OpenGL 1.0, par SGI</Text></Appear>
+          <Notes>GL = Graphics Library</Notes>
+        </Slide>
+
+        <Slide {...slideProps}>
+          <Image src={images.logo_opengl.replace('/', '')} width="40%"/>
+          <Text>API multi-plateforme, multi-langage</Text>
+          <Appear><Text>1992-2006 - OpenGL Architecture Review Board (ARB)</Text></Appear>
+          <Appear><Text>2004 - Programmable, shaders, GLSL</Text></Appear>
+          <Appear><Text>2006+ - consortium <em>Khronos</em> Group</Text></Appear>
+        </Slide>
+
+        <Slide {...slideProps}>
+          <Heading size={4}>OpenGL</Heading>
+          <Text>Desktop</Text>
+          <Image src={images.opengl_desktop.replace('/', '')} width="80%"/>
+          <Appear><Text>Windows, Apple, Linux</Text></Appear>
+          <Appear><Text>Puissant, lourd, complexe</Text></Appear>
+          <Notes>Drivers</Notes>
+        </Slide>
+
+        <Slide {...slideProps}>
+          <Image src={images.logo_opengles.replace('/', '')} width="40%"/>
+          <Text>Une version simplifiée</Text>
+          <Text>Pour l'embarqué</Text>
+          <Appear><Text>2007 - version 2.0</Text></Appear>
+          <Appear><div>
+            <Text>Pour les mobiles (iOS, Android, ...)</Text>
+            <Image src={images.opengles_mobile.replace('/', '')} width="40%"/>
+          </div></Appear>
+          <Notes>Version 3.0 sans trop de succès</Notes>
+        </Slide>
+
+        <Slide {...slideProps}>
+          <Image src={images.logo_webgl.replace('/', '')} width="40%"/>
+          <Text>Portage pour les navigateurs</Text>
+          <Appear><Text>2007-2011 - prototypage</Text></Appear>
+          <Appear><Text>Accent sur la sécurité</Text></Appear>
+          <Appear><Text>2011 - spécification 1.0</Text></Appear>
+          <Appear><div>
+            <Text>2014 - support généralisé</Text>
+            <Image src={images.webgl_browsers.replace('/', '')} width="40%"/>
+          </div></Appear>
+          <Notes>les derniers : IE 11, Safari iOS</Notes>
         </Slide>
 
         { /******************************************************************************/ }
@@ -458,10 +531,11 @@ drawCall();
     
         <Slide {...slideProps}>
           <Heading size={4}>Contenus, données</Heading>
-          <Text>A connaître :</Text>
+          <Text>A connaître, par le consortium <em>Khronos</em> :</Text>
           <List>
             <ListItem>GLTF, pour la géométrie</ListItem>
             <ListItem>Basis, pour les textures</ListItem>
+            <ListItem>Working group '3D commerce'</ListItem>
           </List>
           <Text>Volet important pour une app</Text>
         </Slide>
@@ -494,6 +568,7 @@ drawCall();
           <Image src={images.webxr.replace('/', '')} width="60%"/>
           <Text>XR = VR + AR</Text>
           <Text>Permet l'accès aux périphériques</Text>
+          <Text>Emulateur</Text>
         </Slide>
 
         { /******************************************************************************/ }
@@ -501,11 +576,21 @@ drawCall();
         { /******************************************************************************/ }
 
         <Slide {...slideProps}>
-          <Heading size={2}>Merci !</Heading>
           <Heading size={4}>En résumé</Heading>
-          <Text>Plateforme puissante</Text>
-          <Text>API datée, complexe</Text>
-          <Text>mais des alternatives</Text>
+          <Text>- Plateforme puissante</Text>
+          <Text>- API datée, complexe,</Text>
+          <Text>destinée aux dev 3D</Text>
+          <Text><em>mais</em></Text>
+          <Text>des alternatives</Text>
+        </Slide>
+
+        <Slide {...slideProps}>
+          <Heading size={2}>Merci !</Heading>
+          <Heading size={4}>Des questions ?</Heading>
+          <Heading size={4}>Des commentaires ?</Heading>
+          <Text>Un meetup dédié ?</Text>
+          <Text>&nbsp;</Text>
+          <Text>Nicolas Lelong - @rotoglup</Text>
         </Slide>
 
         { /******************************************************************************/ }
