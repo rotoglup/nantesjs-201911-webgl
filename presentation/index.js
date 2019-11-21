@@ -46,6 +46,8 @@ const images = {
   example_tensorflow: require("../assets/example-tensorflow.png"),
   example_terrain: require("../assets/example-terrain.png"),
   what_CPU_GPU: require("../assets/what-CPU-GPU.png"),
+  what_GPU_multi_cores: require("../assets/what-gpu-multi-cores.jpg"),
+  what_texturemapping: require("../assets/what-texturemapping.png"),
   what_triangles_machine: require("../assets/what-triangles-machine.png"),
   what_programmable: require("../assets/what-programmable.png"),
   api_typed_arrays: require("../assets/api-typed_arrays.png"),
@@ -120,16 +122,29 @@ export default class Presentation extends React.Component {
 
         <Slide {...slideProps}>
           <Heading size={4}>Communique avec le GPU</Heading>
-          <Image src={images.what_CPU_GPU.replace('/', '')} width="60%"/>
+          <Image src={images.what_CPU_GPU.replace('/', '')} width="90%"/>
           <Text>Asynchrone</Text>
           <Text>Mémoire dédiée</Text>
         </Slide>
 
         <Slide {...slideProps}>
-          <Heading size={4}>GPU ?</Heading>
+          <Heading size={4}>Communique avec le GPU</Heading>
+          <Image src={images.what_GPU_multi_cores.replace('/', '')} width="60%"/>
+          <Text>Single Instruction Multiple Threads (SIMT)</Text>
+          <Text>1000+ threads</Text>
+        </Slide>
+
+        <Slide {...slideProps}>
+          <Heading size={4}>Abstraction d'un GPU</Heading>
           <Text>Afficher des triangles</Text>
-          <Image src={images.what_triangles_machine.replace('/', '')} width="60%"/>
+          <Image src={images.what_triangles_machine.replace('/', '')} width="100%"/>
           <Text>...des lignes et des points parfois...</Text>
+        </Slide>
+
+        <Slide {...slideProps}>
+          <Heading size={4}>Abstraction d'un GPU</Heading>
+          <Text>Triangles et textures</Text>
+          <Image src={images.what_texturemapping.replace('/', '')} width="60%"/>
         </Slide>
 
         <Slide {...slideProps}>
@@ -137,6 +152,7 @@ export default class Presentation extends React.Component {
           <Text>oui !</Text>
           <Image src={images.what_programmable.replace('/', '')} width="60%"/>
           <Text>mais c'est programmable !</Text>
+          <Text>On peut être créatifs !</Text>
         </Slide>
 
         { /******************************************************************************/ }
@@ -542,15 +558,23 @@ drawCall();
           <Text>Communauté, exemples, tutos</Text>
         </Slide>
     
+        { /******************************************************************************/ }
+        { /******************************************************************************/ }
+        { /******************************************************************************/ }
+
+        <Slide {...slideProps}>
+          <Heading size={2}>Ecosystème ?</Heading>
+        </Slide>
+
         <Slide {...slideProps}>
           <Heading size={4}>Contenus, données</Heading>
+          <Text>Volet important pour une app</Text>
           <Text>A connaître, par le consortium <em>Khronos</em> :</Text>
           <List>
-            <ListItem>GLTF, pour la géométrie</ListItem>
-            <ListItem>Basis, pour les textures</ListItem>
-            <ListItem>Working group '3D commerce'</ListItem>
+            <Appear><ListItem>GLTF, pour la géométrie</ListItem></Appear>
+            <Appear><ListItem>Basis, pour les textures</ListItem></Appear>
+            <Appear><ListItem>Working group '3D commerce'</ListItem></Appear>
           </List>
-          <Text>Volet important pour une app</Text>
         </Slide>
     
         { /******************************************************************************/ }
@@ -565,7 +589,7 @@ drawCall();
           <Heading size={4}>WebGL 2</Heading>
           <Text>Spécifié depuis 2017</Text>
           <Text>Mort né ?</Text>
-          <Text>Pas de support sur Apple</Text>
+          <Text>Pas de support sur Apple ou Microsoft</Text>
         </Slide>
 
         <Slide {...slideProps}>
