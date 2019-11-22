@@ -1,8 +1,10 @@
-My slides (in french) for [NantesJS](https://nantesjs.org/) Meetup #46, an overview of the WebGL API :
+My slides (in french) for [NantesJS](https://nantesjs.org/) Meetup #46, an overview of the WebGL API.
 
 > **WebGL, WebXR, WebGPU, un décryptage en douceur**
 >
 > WebGL est une API bien installée dans nos navigateurs. Je vous invite à en faire un tour d'horizon : - d'où ça vient ? - à quoi ça sert ? - comment ça fonctionne ? - comment on l'utilise *concrètement* ? Pour finir, nous aborderons également les nouveaux venus WebXR et WebGPU.
+
+Visible here : https://nllsoft.com/talks/201911-nantesjs-webgl/
 
 ## Made with Spectacle
 
