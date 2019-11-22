@@ -40,6 +40,7 @@ const images = {
   opengl_desktop: require("../assets/opengl-desktop.png"),
   opengles_mobile: require("../assets/opengles-mobile.png"),
   example_architecture: require("../assets/example-architecture.png"),
+  example_cedreo: require("../assets/example-cedreo.png"),
   example_claraio: require("../assets/example-claraio.png"),
   example_map: require("../assets/example-map.png"),
   example_graph: require("../assets/example-graph.png"),
@@ -171,12 +172,12 @@ export default class Presentation extends React.Component {
         <Slide {...slideProps}>
           <Text>Afficher rapidement des images</Text>
           <Text textColor="tertiary">3D</Text>
-          <Image src={images.example_architecture.replace('/', '')} width="80%"/>
+          <Image src={images.example_cedreo.replace('/', '')} width="80%"/>
         </Slide>
         <Slide {...slideProps}>
           <Text>Afficher rapidement des images</Text>
           <Text textColor="tertiary">3D</Text>
-          <Image src={images.example_claraio.replace('/', '')} width="80%"/>
+          <Image src={images.example_architecture.replace('/', '')} width="80%"/>
         </Slide>
   
         <Slide {...slideProps}>
@@ -363,7 +364,7 @@ varying vec3 vColor;        // dérivé du vertex shader
 void main()
 {
     // couleur à afficher :
-    gl_FragColor = vec4(inColor, 1.0);
+    gl_FragColor = vec4(vColor, 1.0);
 }`}/>
           <Text>mots clés <Code>varying, gl_FragColor</Code></Text>
         </Slide>
@@ -491,6 +492,10 @@ gl.bindBuffer(gl.ARRAY_BUFFER, colorVBO);
 
         <Slide {...slideProps}>
           <Heading size={4}>API WebGL 'de base'</Heading>
+          <Appear><div>
+            <Text>- Hérite des défauts de OpenGL</Text>
+            <Text>&nbsp;</Text>
+          </div></Appear>
           <Appear><Text>- Complexe</Text></Appear>
           <Appear><Text>à développer (gestion des états)</Text></Appear>
           <Appear><Text>à débugger (erreurs silencieuses)</Text></Appear>
